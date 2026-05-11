@@ -60,7 +60,7 @@ def booking(request):
 
         )
 
-        return redirect('/booking/?submitted=1')
+        return redirect('appointments')
 
     return render(request, 'booking.html')
 

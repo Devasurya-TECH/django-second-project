@@ -132,15 +132,6 @@
         font-size:14px;
     }
 
-    .success-alert{
-        background:rgba(34,197,94,0.12);
-        border:1px solid rgba(34,197,94,0.35);
-        color:#bbf7d0;
-        border-radius:16px;
-        padding:14px 18px;
-        margin-bottom:24px;
-    }
-
     @media(max-width:992px){
         .left-side,
         .right-side{
@@ -209,12 +200,6 @@
                     <div class="right-side">
                         <h1 class="form-title">Appointment Form</h1>
                         <p class="form-subtitle">Fill in your details to schedule your appointment.</p>
-
-                        {% if request.GET.submitted %}
-                        <div class="success-alert">
-                            Your appointment request has been submitted successfully.
-                        </div>
-                        {% endif %}
 
                         <form method="POST">
                             {% csrf_token %}
