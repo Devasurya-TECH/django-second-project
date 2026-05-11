@@ -6,7 +6,7 @@ from .models import Appointment, Doctor
 
 def index(request):
 
-    doctors_list = Doctor.objects.filter(is_active=True)[:3]
+    doctors_list = Doctor.objects.filter(is_active=True).order_by("-created_at")
 
     return render(
         request,
@@ -134,7 +134,7 @@ def delete(request, id):
 
 def doctors(request):
 
-    doctors_list = Doctor.objects.filter(is_active=True)
+    doctors_list = Doctor.objects.filter(is_active=True).order_by("-created_at")
 
     return render(
         request,
