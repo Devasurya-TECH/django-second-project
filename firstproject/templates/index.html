@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Home | MediCare Pro{% endblock %}
 
@@ -300,7 +301,7 @@
 
             <div class="col-lg-6">
                 <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1200&auto=format&fit=crop" class="img-fluid" alt="Hospital care">
+                    <img src="{% static 'images/image.jpg' %}" class="img-fluid" alt="Hospital care">
                     <div class="floating-card">
                         <h4>Emergency Care</h4>
                         <p>Available 24/7 with expert medical support.</p>
