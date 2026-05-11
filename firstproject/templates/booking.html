@@ -1,24 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Book Appointment</title>
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+    <!-- Google Font -->
+
+    <link rel="preconnect"
+    href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
 
     <style>
 
-        body{
-            background:#0b1020;
-            color:white;
-            font-family:Poppins;
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
         }
 
-        .booking-box{
+        body{
+            background:#07111f;
+            overflow-x:hidden;
+        }
+
+        /* Navbar */
+
+        .navbar{
+            background:#07111f;
+            padding:18px 0;
+            border-bottom:1px solid rgba(255,255,255,0.05);
+        }
+
+        .navbar-brand{
+            color:white !important;
+            font-size:32px;
+            font-weight:700;
+        }
+
+        .navbar-brand span{
+            background:linear-gradient(to right,#8b5cf6,#06b6d4);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        .nav-link{
+            color:#cbd5e1 !important;
+            margin-left:20px;
+            transition:0.3s;
+        }
+
+        .nav-link:hover{
+            color:#8b5cf6 !important;
+        }
+
+        /* Main */
+
+        .booking-section{
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            padding:80px 0;
+        }
+
+        .booking-container{
             background:#111827;
-            padding:40px;
-            border-radius:25px;
+            border-radius:35px;
+            overflow:hidden;
+            border:1px solid rgba(255,255,255,0.05);
+            box-shadow:0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        /* Left Side */
+
+        .left-side{
+            background:
+            linear-gradient(
+            to bottom right,
+            rgba(139,92,246,0.9),
+            rgba(6,182,212,0.85)
+            ),
+
+            url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=1200&auto=format&fit=crop');
+
+            background-size:cover;
+            background-position:center;
+
+            padding:60px;
+            height:100%;
+            color:white;
+
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+        }
+
+        .left-side h1{
+            font-size:55px;
+            font-weight:700;
+            line-height:1.2;
+        }
+
+        .left-side p{
+            margin-top:25px;
+            line-height:1.9;
+            color:#e2e8f0;
+        }
+
+        .feature-box{
+            margin-top:40px;
+        }
+
+        .feature{
+            display:flex;
+            align-items:center;
+            margin-bottom:20px;
+        }
+
+        .feature-icon{
+            width:50px;
+            height:50px;
+            border-radius:14px;
+            background:rgba(255,255,255,0.15);
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            margin-right:15px;
+
+            font-size:22px;
+        }
+
+        /* Right Side */
+
+        .right-side{
+            padding:60px;
+            background:#111827;
+        }
+
+        .form-title{
+            color:white;
+            font-size:40px;
+            font-weight:700;
+        }
+
+        .form-subtitle{
+            color:#94a3b8;
+            margin-top:12px;
+            margin-bottom:40px;
+        }
+
+        .form-control,
+        .form-select{
+            background:#1e293b;
+            border:none;
+            height:58px;
+            border-radius:16px;
+            color:white;
+            padding-left:18px;
+            margin-bottom:20px;
+        }
+
+        textarea.form-control{
+            height:140px;
+            padding-top:15px;
+        }
+
+        .form-control:focus,
+        .form-select:focus{
+            background:#1e293b;
+            color:white;
+            box-shadow:none;
+            border:1px solid #8b5cf6;
+        }
+
+        .form-control::placeholder{
+            color:#94a3b8;
+        }
+
+        .submit-btn{
+            width:100%;
+            height:58px;
+
+            border:none;
+
+            border-radius:16px;
+
+            background:
+            linear-gradient(
+            to right,
+            #8b5cf6,
+            #06b6d4
+            );
+
+            color:white;
+
+            font-size:17px;
+            font-weight:600;
+
+            transition:0.3s;
+        }
+
+        .submit-btn:hover{
+            transform:translateY(-4px);
+        }
+
+        .small-text{
+            text-align:center;
+            margin-top:20px;
+            color:#64748b;
+            font-size:14px;
+        }
+
+        /* Responsive */
+
+        @media(max-width:992px){
+
+            .left-side{
+                padding:40px;
+            }
+
+            .right-side{
+                padding:40px;
+            }
+
+            .left-side h1{
+                font-size:42px;
+            }
+
+        }
+
+        @media(max-width:768px){
+
+            .left-side{
+                display:none;
+            }
+
+            .form-title{
+                font-size:32px;
+            }
+
         }
 
     </style>
@@ -26,69 +264,279 @@
 </head>
 <body>
 
-<div class="container py-5">
+<!-- Navbar -->
 
-    <h1 class="text-center mb-5">Book Appointment</h1>
+<nav class="navbar navbar-expand-lg">
 
-    <div class="row justify-content-center">
+    <div class="container">
 
-        <div class="col-md-8">
+        <a class="navbar-brand" href="#">
+            Medi<span>Care</span> Pro
+        </a>
 
-            <div class="booking-box">
+        <button class="navbar-toggler bg-light"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menu">
 
-                <form>
+            <span class="navbar-toggler-icon"></span>
 
-                    <div class="row">
+        </button>
 
-                        <div class="col-md-6 mb-3">
+        <div class="collapse navbar-collapse"
+        id="menu">
 
-                            <input type="text"
-                            class="form-control"
-                            placeholder="Full Name">
+            <ul class="navbar-nav ms-auto">
 
-                        </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">
+                        Home
+                    </a>
+                </li>
 
-                        <div class="col-md-6 mb-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="/doctors/">
+                        Doctors
+                    </a>
+                </li>
 
-                            <input type="email"
-                            class="form-control"
-                            placeholder="Email">
+                <li class="nav-item">
+                    <a class="nav-link" href="/services/">
+                        Services
+                    </a>
+                </li>
 
-                        </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact/">
+                        Contact
+                    </a>
+                </li>
 
-                        <div class="col-md-6 mb-3">
+            </ul>
 
-                            <input type="date"
-                            class="form-control">
+        </div>
 
-                        </div>
+    </div>
 
-                        <div class="col-md-6 mb-3">
+</nav>
 
-                            <input type="time"
-                            class="form-control">
+<!-- Booking Section -->
 
-                        </div>
+<section class="booking-section">
 
-                        <div class="col-12 mb-3">
+    <div class="container">
 
-                            <textarea rows="4"
-                            class="form-control"
-                            placeholder="Symptoms"></textarea>
+        <div class="booking-container">
 
-                        </div>
+            <div class="row g-0">
 
-                        <div class="col-12">
+                <!-- Left Side -->
 
-                            <button class="btn btn-primary w-100">
-                                Confirm Booking
-                            </button>
+                <div class="col-lg-5">
+
+                    <div class="left-side">
+
+                        <h1>
+                            Book Your <br>
+                            Appointment
+                        </h1>
+
+                        <p>
+                            Get world-class healthcare support
+                            with our experienced doctors and
+                            modern medical facilities.
+                        </p>
+
+                        <div class="feature-box">
+
+                            <div class="feature">
+
+                                <div class="feature-icon">
+                                    🩺
+                                </div>
+
+                                <div>
+
+                                    <h5>Expert Doctors</h5>
+
+                                    <small>
+                                        Specialist healthcare professionals
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="feature">
+
+                                <div class="feature-icon">
+                                    ⚡
+                                </div>
+
+                                <div>
+
+                                    <h5>Instant Booking</h5>
+
+                                    <small>
+                                        Quick and easy appointment process
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="feature">
+
+                                <div class="feature-icon">
+                                    🏥
+                                </div>
+
+                                <div>
+
+                                    <h5>Modern Facility</h5>
+
+                                    <small>
+                                        Advanced healthcare infrastructure
+                                    </small>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
                     </div>
 
-                </form>
+                </div>
+
+                <!-- Right Side -->
+
+                <div class="col-lg-7">
+
+                    <div class="right-side">
+
+                        <h1 class="form-title">
+                            Appointment Form
+                        </h1>
+
+                        <p class="form-subtitle">
+                            Fill in your details to schedule
+                            your appointment.
+                        </p>
+
+                        <form method="POST">
+
+                            {% csrf_token %}
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+
+                                    <input type="text"
+                                    name="patient_name"
+                                    class="form-control"
+                                    placeholder="Full Name">
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <input type="email"
+                                    name="email"
+                                    class="form-control"
+                                    placeholder="Email Address">
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+
+                                    <input type="text"
+                                    name="phone"
+                                    class="form-control"
+                                    placeholder="Phone Number">
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <select
+                                    name="department"
+                                    class="form-select">
+
+                                        <option>
+                                            Select Department
+                                        </option>
+
+                                        <option>
+                                            Cardiology
+                                        </option>
+
+                                        <option>
+                                            Neurology
+                                        </option>
+
+                                        <option>
+                                            Orthopedics
+                                        </option>
+
+                                        <option>
+                                            Pediatrics
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+
+                                    <input type="date"
+                                    name="appointment_date"
+                                    class="form-control">
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <input type="time"
+                                    name="appointment_time"
+                                    class="form-control">
+
+                                </div>
+
+                            </div>
+
+                            <textarea
+                            name="message"
+                            class="form-control"
+                            placeholder="Describe your symptoms or problem"></textarea>
+
+                            <button type="submit"
+                            class="submit-btn">
+
+                                Confirm Appointment
+
+                            </button>
+
+                            <p class="small-text">
+
+                                Our team will contact you shortly
+                                after confirmation.
+
+                            </p>
+
+                        </form>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -96,7 +544,9 @@
 
     </div>
 
-</div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
