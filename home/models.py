@@ -1,5 +1,7 @@
+import os
+
 from django.db import models
-from PIL import Image
+from PIL import Image, ImageOps
 
 
 class Doctor(models.Model):
@@ -37,10 +39,12 @@ class Doctor(models.Model):
 
         super().save(*args, **kwargs)
 
-        if self.image and self.image.path:
+        if self.image and self.image.path and os.path.exists(self.image.path):
             image_path = self.image.path
 
             with Image.open(image_path) as img:
+                img = ImageOps.exif_transpose(img)
+
                 if img.mode in ("RGBA", "P"):
                     img = img.convert("RGB")
 
