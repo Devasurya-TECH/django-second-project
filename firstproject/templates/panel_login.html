@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | MediCare Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: #e2e8f0;
+            background:
+                radial-gradient(circle at top left, rgba(59,130,246,0.28), transparent 28%),
+                radial-gradient(circle at bottom right, rgba(14,165,233,0.18), transparent 24%),
+                linear-gradient(160deg, #020617 0%, #0f172a 58%, #111827 100%);
+        }
+        .shell {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+        .card-shell {
+            width: min(460px, 100%);
+            background: rgba(15, 23, 42, 0.88);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            border-radius: 28px;
+            padding: 34px;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(18px);
+        }
+        .eyebrow {
+            color: #38bdf8;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        p { color: #94a3b8; }
+        .form-control {
+            background: #0f172a;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            color: #fff;
+            border-radius: 14px;
+            padding: 14px 16px;
+        }
+        .form-control:focus {
+            background: #0f172a;
+            color: #fff;
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 0.2rem rgba(56, 189, 248, 0.14);
+        }
+        .btn-panel {
+            background: linear-gradient(90deg, #2563eb, #0ea5e9);
+            border: 0;
+            color: white;
+            border-radius: 14px;
+            padding: 14px 18px;
+            font-weight: 700;
+        }
+        .hint {
+            font-size: 0.92rem;
+            color: #cbd5e1;
+            border-top: 1px solid rgba(148, 163, 184, 0.14);
+            padding-top: 16px;
+            margin-top: 18px;
+        }
+        .alert-lite {
+            display: none;
+            margin-top: 16px;
+            border-radius: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <div class="card-shell">
+            <div class="eyebrow">Staff Panel</div>
+            <h1>Admin Login</h1>
+            <p>Use a staff account to access bookings, doctors, and panel data.</p>
+
+            <form id="loginForm" class="mt-4">
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input id="username" class="form-control" autocomplete="username" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input id="password" type="password" class="form-control" autocomplete="current-password" required>
+                </div>
+                <button class="btn btn-panel w-100" type="submit">Sign In</button>
+            </form>
+
+            <div id="errorBox" class="alert alert-danger alert-lite"></div>
+
+            <div class="hint">
+                JWT is used for the panel API. Non-staff users are blocked.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const accessKey = 'adminAccessToken';
+        const refreshKey = 'adminRefreshToken';
+        const tokenUrl = "{% url 'panel_token' %}";
+        const dashboardUrl = "{% url 'panel_dashboard' %}";
+
+        if (localStorage.getItem(accessKey)) {
+            window.location.href = dashboardUrl;
+        }
+
+        const form = document.getElementById('loginForm');
+        const errorBox = document.getElementById('errorBox');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            errorBox.style.display = 'none';
+            errorBox.textContent = '';
+
+            const response = await fetch(tokenUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: document.getElementById('username').value,
+                    password: document.getElementById('password').value,
+                }),
+            });
+
+            const payload = await response.json();
+
+            if (!response.ok) {
+                errorBox.textContent = payload.detail || 'Login failed.';
+                errorBox.style.display = 'block';
+                return;
+            }
+
+            localStorage.setItem(accessKey, payload.access);
+            localStorage.setItem(refreshKey, payload.refresh);
+            window.location.href = dashboardUrl;
+        });
+    </script>
+</body>
+</html>

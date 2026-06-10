@@ -1,6 +1,7 @@
 from django.urls import path
+from rest_framework_simplejwt.views import TokenRefreshView
 
-from . import views
+from . import panel, views
 
 
 urlpatterns = [
@@ -34,5 +35,19 @@ urlpatterns = [
     path('services/',
     views.services,
     name='services'),
+
+    path('panel/login/', panel.panel_login, name='panel_login'),
+
+    path('panel/', panel.panel_dashboard, name='panel_dashboard'),
+
+    path('panel/api/dashboard/', panel.PanelDashboardAPIView.as_view(), name='panel_dashboard_api'),
+
+    path('panel/api/appointments/<int:pk>/', panel.PanelAppointmentDetailAPIView.as_view(), name='panel_appointment_detail'),
+
+    path('panel/api/doctors/<int:pk>/', panel.PanelDoctorDetailAPIView.as_view(), name='panel_doctor_detail'),
+
+    path('panel/api/token/', panel.StaffTokenObtainPairView.as_view(), name='panel_token'),
+
+    path('panel/api/token/refresh/', TokenRefreshView.as_view(), name='panel_token_refresh'),
 
 ]
