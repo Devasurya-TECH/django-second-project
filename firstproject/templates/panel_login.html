@@ -115,11 +115,6 @@
         const accessKey = 'adminAccessToken';
         const refreshKey = 'adminRefreshToken';
         const tokenUrl = "{% url 'panel_token' %}";
-        const dashboardUrl = "{% url 'panel_dashboard' %}";
-
-        if (localStorage.getItem(accessKey)) {
-            window.location.href = dashboardUrl;
-        }
 
         const form = document.getElementById('loginForm');
         const errorBox = document.getElementById('errorBox');
